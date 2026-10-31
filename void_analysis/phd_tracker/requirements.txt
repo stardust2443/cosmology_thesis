@@ -1,0 +1,7 @@
+# Core requirements (works out of the box with pure Python stdlib + pyyaml)
+pyyaml>=6.0
+requests>=2.28.0
+
+# Optional UI dashboard
+streamlit>=1.30.0
+pandas>=2.0.0

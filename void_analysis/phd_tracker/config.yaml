@@ -1,0 +1,88 @@
+# PhD Application & Academic Intelligence Pipeline Configuration
+# Customize this file for your specific research profile and target regions.
+
+sync:
+  interval_hours: 8           # Update frequency (default: 8 hours)
+  auto_sync: true             # Enable background periodic updates
+  notify_on_new: true
+
+user_profile:
+  name: "Arun"
+  primary_focus: "Cosmology, Large-Scale Structure, Cosmic Voids & Parameter Inference"
+  target_degree: "PhD"
+  target_start: "2025/2026"
+  preferred_regions:
+    - "Germany"
+    - "United Kingdom"
+    - "Netherlands"
+    - "Switzerland"
+    - "France"
+    - "Italy"
+    - "Spain"
+    - "Europe"
+  thesis_summary: "Validation of BitVF back-in-time void finder on Aletheia N-body simulations, void size functions (VSF), and cosmological parameter inference (Omega_m, sigma_8) via CosmoBolognaLib (CBL) MCMC."
+  key_skills:
+    - "Cosmic void statistics & topological analysis"
+    - "N-body simulations & mock catalogs"
+    - "Bayesian parameter inference & MCMC"
+    - "CosmoBolognaLib & C++/Python numerical bindings"
+    - "Survey science (Euclid, DESI, Rubin/LSST)"
+
+keywords:
+  # Tier 1 (Weight: 3.0) - Exact methodology and core domain matches
+  tier_1:
+    - "cosmic voids"
+    - "void size function"
+    - "large-scale structure"
+    - "cosmological inference"
+    - "N-body simulations"
+    - "Euclid"
+    - "DESI"
+    - "Rubin"
+    - "LSST"
+    - "MCMC"
+    - "CosmoBolognaLib"
+    - "Aletheia"
+    - "BitVF"
+
+  # Tier 2 (Weight: 1.5) - Adjacent astrophysics and computational methods
+  tier_2:
+    - "galaxy clustering"
+    - "weak lensing"
+    - "halo mass function"
+    - "simulation-based inference"
+    - "neural posterior estimation"
+    - "cosmic web"
+    - "dark energy"
+    - "modified gravity"
+    - "mock catalogs"
+    - "baryon acoustic oscillations"
+    - "point processes"
+    - "topological data analysis"
+
+  # Negative filters - Downrank irrelevant subfields
+  exclude:
+    - "stellar evolution"
+    - "exoplanet atmosphere"
+    - "solar flare"
+    - "heliophysics"
+
+arxiv:
+  categories:
+    - "astro-ph.CO"   # Cosmology and Nongalactic Astrophysics
+    - "astro-ph.GA"   # Astrophysics of Galaxies
+    - "astro-ph.IM"   # Instrumentation and Methods for Astrophysics
+    - "physics.comp-ph" # Computational Physics
+    - "stat.ML"        # Machine Learning
+  max_results_per_query: 40
+  days_back: 180
+
+sources:
+  inspire_hep: true
+  aas_jobs: true
+  academic_transfer: true
+  euraxess: true
+  erc_grants: true
+
+database:
+  path: "data/tracker.db"

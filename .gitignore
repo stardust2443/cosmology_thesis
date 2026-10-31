@@ -1,50 +1,111 @@
-# Prerequisites
-*.d
+# ==============================================================================
+# GITIGNORE: Cosmological Void Analysis & PhD Thesis Research Repository
+# ==============================================================================
 
-# Compiled Object files
-*.slo
-*.lo
+# --- PDFs, Presentations & Large Office Documents ---
+*.pdf
+*.pptx
+*.ppt
+*.key
+*.odp
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+~$*
+
+# --- N-body Simulation Data & Heavy Catalogs (> 100MB / Multi-GB) ---
+AletheiaForArun/
+**/AletheiaForArun/
+void_analysis/data/**
+!void_analysis/data/
+!void_analysis/data/README.md
+!void_analysis/data/cleaned/
+!void_analysis/data/cleaned/BitVF_VSF/
+!void_analysis/data/cleaned/BitVF_VSF/*.csv
+!void_analysis/data/cleaned/Thesis_Exact/
+!void_analysis/data/cleaned/Thesis_Exact/*.csv
+theses_ex_compr/
+thesis_docs/
+thesis_docs.zip
+
+# Heavy binary / catalog formats
+*.dat
+*.adj
+*.vol
+*.trvol
+*.zone
+*.npy
+*.npz
+*.fits
+*.fits.gz
+*.hdf5
+*.h5
+
+# --- LaTeX Auxiliary & Build Files ---
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex
+*.out
+*.toc
+*.lot
+*.lof
+*.idx
+*.ilg
+*.ind
+*.run.xml
+*-blx.bib
+*.nav
+*.snm
+*.vrb
+
+# --- Python Environment & Caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# --- C++ / Fortran Build Artifacts & Binaries ---
 *.o
 *.obj
-
-# Precompiled Headers
+*.slo
+*.lo
 *.gch
 *.pch
-
-# Linker files
 *.ilk
-
-# Debugger Files
 *.pdb
-
-# Compiled Dynamic libraries
-*.so
 *.dylib
 *.dll
 *.so.*
-
-
-# Fortran module files
 *.mod
 *.smod
-
-# Compiled Static libraries
 *.lai
 *.la
 *.a
 *.lib
-
-# Executables
 *.exe
-*.out
-*.app
-
-# Build directories
+first_cosmo
+run_aletheia_bitvf
+*.dSYM/
 build/
 Build/
 build-*/
-
-# CMake generated files
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
@@ -52,20 +113,21 @@ Makefile
 install_manifest.txt
 compile_commands.json
 
-# Temporary files
+# --- Editor, OS & Agent Caches ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.claude/
+**/LLM_convos/
+**/LLM_suggestions/
+*.swp
+*.swo
+*~
+*.bak
 *.tmp
 *.log
-*.bak
-*.swp
 
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/
-void_analysis/data/subsamples/*.dat
-*.dat

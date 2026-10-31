@@ -1,77 +1,140 @@
+#!/usr/bin/env python3
+"""
+vsf_model.py
+Theoretical Void Size Function (VSF) using the Volume-Conserving (Vdn) model.
+
+Implements the framework from:
+  - Sheth & van de Weygaert (2004): SvdW two-barrier multiplicity function
+  - Jennings et al. (2013): Vdn volume-conserving correction
+
+The model predicts dn/dlnR_E [h^3 Mpc^-3] as a function of Eulerian void
+radius R_E, given cosmological parameters (Omega_m, sigma_8).
+
+References:
+  Thesis Eq. 2.5  — SvdW multiplicity f(sigma)
+  Thesis Eq. 2.12 — Lagrangian-to-Eulerian mapping
+  Thesis Eq. 2.18 — Vdn model
+"""
 import numpy as np
 from colossus.cosmology import cosmology
-from colossus.lss import variance
+from colossus.lss import peaks
 
-def svdw_multiplicity(sigma: np.ndarray, delta_v: float = -2.71, delta_c: float = 1.686) -> np.ndarray:
+# ─── Physical constants ───────────────────────────────────────────────
+DELTA_V_LINEAR = -2.71      # Linear void formation threshold (shell-crossing)
+DELTA_C = 1.686             # Linear halo collapse threshold
+DELTA_NL_V = -0.80          # Nonlinear density contrast inside the void (TH-0p80)
+
+# Lagrangian-to-Eulerian expansion factor: R_E = R_L * (1 + delta_NL)^(-1/3)
+EXPANSION_FACTOR = (1.0 + DELTA_NL_V) ** (-1.0 / 3.0)  # ≈ 1.71
+
+
+def _sigma_from_R(R_lagrangian):
     """
-    Computes the Sheth-van de Weygaert (2004) two-barrier multiplicity function.
+    Compute σ(R_L) using colossus peakHeight.
     
-    Args:
-        sigma: Variance of the linear density field.
-        delta_v: Linear void formation threshold (default: -2.71).
-        delta_c: Linear halo collapse threshold (default: 1.686).
-        
-    Returns:
-        The void multiplicity function f(nu).
+    peakHeight returns ν = δ_c / σ(M), so σ = δ_c / ν.
+    We convert R_L [Mpc/h] → M [Msun/h] → ν → σ.
     """
-    nu = np.abs(delta_v) / sigma
-    D = np.abs(delta_v) / (delta_c + np.abs(delta_v))
-    x = D / nu
+    M = peaks.lagrangianM(R_lagrangian)
+    nu = peaks.peakHeight(M, z=0.0)
+    sigma = DELTA_C / nu
+    return sigma
+
+
+def svdw_multiplicity(sigma, delta_v=DELTA_V_LINEAR):
+    """
+    Sheth-van de Weygaert (2004) two-barrier multiplicity function.
     
-    # 4-term approximation of the infinite series expansion
-    f = np.zeros_like(nu)
-    for j in range(1, 5):
+    Thesis Eq. 2.5:
+        f(σ) = 2 Σ_{j=1}^{∞} exp[-(jπx)²/2] · jπx² · sin(jπD)
+    where:
+        D = |δ_v| / (δ_c + |δ_v|)
+        x = D·σ / |δ_v|
+    
+    We sum 50 terms for convergence (the series converges rapidly).
+    """
+    abs_dv = np.abs(delta_v)
+    D = abs_dv / (DELTA_C + abs_dv)
+    x = D * sigma / abs_dv
+    
+    f = np.zeros_like(sigma, dtype=float)
+    for j in range(1, 51):
         term = j * np.pi * x**2 * np.sin(j * np.pi * D) * np.exp(-0.5 * (j * np.pi * x)**2)
         f += term
-        
+    
     return 2.0 * f
 
-def get_theoretical_vsf(r_bins: np.ndarray, omega_m: float, sigma8: float) -> np.ndarray:
+
+def get_theoretical_vsf(R_eulerian, omega_m, sigma8, delta_v=DELTA_V_LINEAR):
     """
-    Calculates the Volume-Conserving (Vdn) theoretical Void Size Function.
+    Compute the Vdn (Volume-Conserving) theoretical VSF: dn/dlnR_E.
+    
+    Thesis Eq. 2.18:
+        dn/dlnR_E = [f(σ) / V(R_E)] · |dlnσ⁻¹/dlnR_L| · dlnR_L/dlnR_E
+    
+    With volume conservation (Vdn correction):
+        dn/dlnR_E = [f(σ) / V(R_E)] · |dlnσ⁻¹/dlnR_L|
+        
+    Since R_E = R_L · C  (C = expansion factor),  dlnR_L/dlnR_E = 1.
+    And V(R_E) = (4π/3) R_E³.
     
     Args:
-        r_bins: Array of void radii in Mpc/h.
-        omega_m: Matter density parameter.
-        sigma8: Amplitude of matter fluctuations.
-        
+        R_eulerian: Array of Eulerian void radii [Mpc/h].
+        omega_m:    Matter density parameter Ω_m.
+        sigma8:     Amplitude of matter fluctuations σ_8.
+        delta_v:    Linear void formation threshold (default: -2.71).
+    
     Returns:
-        Theoretical abundance dn/dlnR in (h/Mpc)^3.
+        dn/dlnR_E in [h³ Mpc⁻³].
     """
-    # 1. Initialize custom cosmology for the MCMC step
-    params = {'flat': True, 'H0': 67.74, 'Om0': omega_m, 'Ob0': 0.0486, 'sigma8': sigma8, 'ns': 0.966}
+    R_eulerian = np.atleast_1d(np.asarray(R_eulerian, dtype=float))
+    
+    # 1. Set cosmology for this MCMC step
+    params = {
+        'flat': True,
+        'H0': 67.36,
+        'Om0': omega_m,
+        'Ob0': 0.0493,
+        'sigma8': sigma8,
+        'ns': 0.9649,
+    }
     cosmology.setCosmology('mcmc_step', params)
     
-    # 2. Convert Eulerian radius (R) to Lagrangian radius (R_L)
-    # Vdn model requires mapping the observed non-linear radius to the linear initial state.
-    delta_nl = -0.8
-    r_L = r_bins * (1.0 + delta_nl)**(-1.0 / 3.0)
+    # 2. Map Eulerian R_E → Lagrangian R_L
+    R_L = R_eulerian / EXPANSION_FACTOR
     
-    # 3. Calculate Linear Variance sigma(R_L)
-    sig = variance.sigmaR(r_L)
+    # 3. Compute σ(R_L)
+    sigma = _sigma_from_R(R_L)
     
-    # 4. Calculate the logarithmic derivative: |dln(sigma) / dlnR|
-    # Using a standard central finite difference
+    # 4. Compute |dlnσ⁻¹/dlnR_L| via central finite difference
     eps = 1e-4
-    sig_plus = variance.sigmaR(r_L * (1.0 + eps))
-    sig_minus = variance.sigmaR(r_L * (1.0 - eps))
-    dln_sig_dlnR = np.abs(np.log(sig_plus / sig_minus) / (2.0 * eps))
+    sigma_plus = _sigma_from_R(R_L * (1.0 + eps))
+    sigma_minus = _sigma_from_R(R_L * (1.0 - eps))
+    # dlnσ/dlnR = (ln σ_+ - ln σ_-) / (2 eps)
+    # dlnσ⁻¹/dlnR = -dlnσ/dlnR
+    dln_sigma_inv_dlnR = -np.log(sigma_plus / sigma_minus) / (2.0 * eps)
+    dln_sigma_inv_dlnR = np.abs(dln_sigma_inv_dlnR)
     
-    # 5. Compute the multiplicity function f(nu)
-    f_nu = svdw_multiplicity(sig)
+    # 5. Multiplicity function
+    f_nu = svdw_multiplicity(sigma, delta_v=delta_v)
     
-    # 6. Assemble the final VSF equation
-    V_L = (4.0 * np.pi / 3.0) * r_L**3
-    dn_dlnR = (f_nu / V_L) * dln_sig_dlnR
+    # 6. Eulerian volume
+    V_E = (4.0 * np.pi / 3.0) * R_eulerian**3
     
-    return dn_dlnR
+    # 7. Assemble Vdn model (Eq. 2.18)
+    dn_dlnR_E = (f_nu / V_E) * dln_sigma_inv_dlnR
+    
+    return dn_dlnR_E
 
+
+# ─── Quick self-test ──────────────────────────────────────────────────
 if __name__ == "__main__":
-    # Minimal Test
-    r_test = np.linspace(2.0, 20.0, 10)
-    abundance = get_theoretical_vsf(r_test, omega_m=0.31, sigma8=0.81)
+    # Test at Aletheia true cosmology
+    R_test = np.linspace(3.0, 16.0, 20)
+    vsf = get_theoretical_vsf(R_test, omega_m=0.315, sigma8=0.811)
     
-    print("R [Mpc/h]  |  dn/dlnR")
-    print("-" * 25)
-    for r, n in zip(r_test, abundance):
-        print(f"{r:8.2f}   |  {n:.5e}")
+    print("Vdn Model Test (Aletheia cosmology: Ωm=0.315, σ8=0.811)")
+    print(f"{'R_E [Mpc/h]':>12s}  {'dn/dlnR_E':>12s}")
+    print("-" * 28)
+    for r, n in zip(R_test, vsf):
+        print(f"{r:12.2f}  {n:12.5e}")

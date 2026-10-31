@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & Virtual Envs
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Local Database & User State (Privacy by Design)
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/*.json
+*.db
+*.sqlite
+
+# Streamlit local config & cache
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# IDE & OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test & coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/

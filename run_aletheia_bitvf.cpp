@@ -9,14 +9,14 @@ int main (int argc, char **argv) {
     if (argc != 3) {
         std::cerr << "Usage: ./run_aletheia_bitvf <input_catalog> <output_prefix>" << std::endl;
         return 1;
-    }
+
 
     std::string tracer_file   = argv[1];
     std::string output_file   = argv[2];
 
     std::cout << "--- Starting BitVF on " << tracer_file << " ---" << std::endl;
 
-    // 2. Hardcoded Physics Parameters (Thesis Sec 6.5.2)
+    // 2. Hardcoded Physics Parameters
     std::vector<int> col_trac = {0, 1, 2};
     unsigned int Nrec         = 50;
     double threshold          = 1e-3;
@@ -62,4 +62,5 @@ int main (int argc, char **argv) {
   }
    
   return 0; 
+}
 }

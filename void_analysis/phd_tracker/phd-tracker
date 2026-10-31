@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Quick launcher for PhD Application & Academic Intelligence Pipeline
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec python3 "${SCRIPT_DIR}/phd_tracker/cli.py" "$@"

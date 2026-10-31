@@ -1,0 +1,50 @@
+# Example Configuration for Open-Source PhD Application & Academic Intelligence Pipeline
+# Copy this to `config.yaml` and customize for your research area.
+
+sync:
+  interval_hours: 8           # Update frequency (default: 8 hours)
+  auto_sync: true             # Enable background periodic updates
+  notify_on_new: true
+
+user_profile:
+  name: "Your Name"
+  primary_focus: "Your Research Subfield"
+  target_degree: "PhD"
+  target_start: "2025/2026"
+  preferred_regions:
+    - "Germany"
+    - "United Kingdom"
+    - "Netherlands"
+    - "Switzerland"
+    - "Europe"
+  thesis_summary: "Brief summary of your Master's/Bachelor's thesis and primary computational or theoretical methods."
+  key_skills:
+    - "Your Key Skill 1"
+    - "Your Key Skill 2"
+
+keywords:
+  tier_1:
+    - "your primary keyword 1"
+    - "your primary keyword 2"
+  tier_2:
+    - "adjacent subfield topic 1"
+    - "adjacent subfield topic 2"
+  exclude:
+    - "irrelevant topic"
+
+arxiv:
+  categories:
+    - "astro-ph.CO"
+    - "astro-ph.GA"
+  max_results_per_query: 40
+  days_back: 180
+
+sources:
+  inspire_hep: true
+  aas_jobs: true
+  academic_transfer: true
+  euraxess: true
+  erc_grants: true
+
+database:
+  path: "data/tracker.db"

@@ -1,0 +1,197 @@
+\documentclass[10pt,a4paper]{article}
+
+% ─────────────────────────────────────────────────────────────
+%  PACKAGES & PAGE GEOMETRY (European Standard A4)
+% ─────────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, margin=1.45cm, top=1.4cm, bottom=1.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+% ─────────────────────────────────────────────────────────────
+%  COLOR DEFINITIONS (Understated European Academic Palette)
+% ─────────────────────────────────────────────────────────────
+\definecolor{primarynavy}{RGB}{20, 45, 85}      % Oxford Navy
+\definecolor{secondaryslate}{RGB}{75, 85, 95}   % Slate Grey
+\definecolor{accentlink}{RGB}{25, 85, 140}      % Subdued Blue
+\definecolor{rulecolor}{RGB}{195, 205, 215}     % Soft Divider Line
+
+% ─────────────────────────────────────────────────────────────
+%  HYPERREF SETUP
+% ─────────────────────────────────────────────────────────────
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accentlink,
+    urlcolor=accentlink,
+    citecolor=primarynavy,
+    pdftitle={Arun Mitra Kommireddy - Academic Curriculum Vitae},
+    pdfauthor={Arun Mitra Kommireddy},
+    pdfsubject={Academic Curriculum Vitae - Cosmology and Large-Scale Structure}
+}
+
+% ─────────────────────────────────────────────────────────────
+%  HEADER / FOOTER FORMATTING
+% ─────────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}}
+\lfoot{\footnotesize\color{secondaryslate}Arun Mitra Kommireddy $\;\vert\;$ Academic Curriculum Vitae}
+\rfoot{\footnotesize\color{secondaryslate}Page \thepage\ of 2}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Section Titles with Horizontal Rule
+\titleformat{\section}
+    {\vspace{3pt}\color{primarynavy}\normalsize\bfseries\scshape}
+    {}{0pt}
+    {}[\vspace{-3pt}\color{rulecolor}\rule{\textwidth}{0.7pt}\vspace{2pt}]
+
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+
+% Custom Bullet Lists
+\setlist[itemize]{
+    leftmargin=1.15em,
+    itemsep=1.5pt,
+    topsep=1.5pt,
+    parsep=0pt,
+    label={\color{primarynavy}\scriptsize$\blacktriangleright$}
+}
+
+% Command for Experience / Education Header
+\newcommand{\entryheader}[4]{%
+    \noindent\textbf{#1} \hfill {\color{secondaryslate}\footnotesize\textbf{#2}}\\%
+    \noindent\textit{#3} \hfill {\color{secondaryslate}\footnotesize\textit{#4}}\vspace{1.5pt}%
+}
+
+% ─────────────────────────────────────────────────────────────
+%  DOCUMENT CONTENT
+% ─────────────────────────────────────────────────────────────
+\begin{document}
+
+% ═════════════════════════════════════════════════════════════
+%  HEADER / CONTACT INFORMATION
+% ═════════════════════════════════════════════════════════════
+\begin{center}
+    {\LARGE\bfseries\color{primarynavy} Arun Mitra Kommireddy} \\[2.5pt]
+    {\normalsize\color{secondaryslate}\textbf{Large-Scale Structure Cosmology $\;\cdot\;$ Cosmic Voids $\;\cdot\;$ Computational Astrophysics}} \\[4pt]
+    
+    {\small
+    \href{mailto:arunmitra.k@gmail.com}{arunmitra.k@gmail.com} $\;\vert\;$ 
+    \href{mailto:f20212443@hyderabad.bits-pilani.ac.in}{f20212443@hyderabad.bits-pilani.ac.in} $\;\vert\;$ 
+    Location: Hyderabad, India
+    } \\[1.5pt]
+    {\small
+    \textbf{GitHub:} \href{https://github.com/stardust2443}{github.com/stardust2443} $\;\vert\;$ 
+    \textbf{LinkedIn:} \href{https://linkedin.com/in/arun-mitra}{linkedin.com/in/arun-mitra} $\;\vert\;$ 
+    \textbf{Thesis Codebase:} \href{https://github.com/stardust2443/cosmology_thesis}{github.com/stardust2443/cosmology\_thesis}
+    }
+\end{center}
+
+\vspace{-6pt}
+
+% ═════════════════════════════════════════════════════════════
+%  RESEARCH INTERESTS
+% ═════════════════════════════════════════════════════════════
+\section{Research Interests}
+\textbf{Large-Scale Structure Cosmology:} Cosmic void statistics, Void Size Functions (VSF), and excursion-set modeling $\cdot$ \textbf{Algorithmic Void Identification:} Dynamical displacement field reconstruction (\texttt{BitVF}) vs.\ Voronoi watershed algorithms (\texttt{REVOLVER}/\texttt{ZOBOV}) $\cdot$ \textbf{Early Universe \& Relics:} Primordial Black Holes (PBHs), critical collapse, and cosmological perturbation growth $\cdot$ \textbf{Statistical Inference:} Bayesian parameter recovery ($\Omega_m, \sigma_8, b_{\mathrm{void}}$), Markov Chain Monte Carlo (MCMC), and spatial Jackknife covariance matrices $\cdot$ \textbf{Survey Science:} Preparing void observables for Stage-IV dark energy probes (Euclid, DESI).
+
+% ═════════════════════════════════════════════════════════════
+%  EDUCATION
+% ═════════════════════════════════════════════════════════════
+\section{Education}
+
+\entryheader{Integrated Dual Degree: M.Sc. (Hons.) Physics \& B.E. (Hons.) Mechanical Engineering}{Aug 2021 -- Jul 2026}{Birla Institute of Technology and Science (BITS), Pilani}{Hyderabad Campus, India}
+\begin{itemize}
+    \item \textbf{Admission Selectivity:} Admitted through nationwide BITSAT examination ($<2\%$ acceptance rate among $\sim 200{,}000$ applicants).
+    \item \textbf{Curriculum:} 5-year rigorous dual-degree curriculum combining theoretical/computational physics with applied mathematics and continuum mechanics.
+    \item \textbf{Relevant Coursework:} General Relativity \& Cosmology, Classical Field Theory, Quantum Mechanics I \& II, Statistical Mechanics, Mathematical Methods of Physics, Computational Physics, Fluid Dynamics, Numerical Optimization, Probability \& Applied Statistics.
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════
+%  RESEARCH EXPERIENCE
+% ═════════════════════════════════════════════════════════════
+\section{Research Experience}
+
+\entryheader{Off-Campus Master's Research Thesis --- Cosmic Void Statistics \& Parameter Inference}{Sep 2025 -- Jun 2026}{External Advisors: Prof.\ Federico Marulli (Uni.\ Bologna / INAF), Dr.\ Simone Sartori (INAF-IASF Milano)}{Bologna, Italy / India}
+\textit{BITS Pilani Co-Supervisors: Prof.\ Sashideep Gutti, Prof.\ Ram Chandra Murthy Kalluri}
+\begin{itemize}
+    \item \textbf{Excursion-Set Void Modeling on $N$-body Simulations:} Evaluated the Jennings et al.\ (2013) Volume-Conserving (Vdn) theoretical model on the $(1\,h^{-1}\mathrm{Gpc})^3$ Aletheia simulation suite across four mass-thresholded halo catalogues (100P, 75P, 50P, 30P; effective linear bias $b_{\mathrm{eff}} \in [0.86, 1.02]$).
+    \item \textbf{Discovery of Linear Void Barrier Universality ($B_{\mathrm{slope}} \sim 0.9$):} Discovered that linear barrier scaling ($b_{\mathrm{void}} = B_{\mathrm{slope}} b_{\mathrm{eff}} + B_{\mathrm{offset}}$) matches between dynamical Optimal Transport reconstruction (\texttt{BitVF}) and Voronoi watershed (\texttt{REVOLVER}) to an unprecedented \textbf{$0.07\sigma$} ($B_{\mathrm{slope}}^{\mathrm{BitVF}} = 0.914 \pm 0.043$ vs.\ $B_{\mathrm{slope}}^{\mathrm{REVOLVER}} = 0.910 \pm 0.046$). Proved that linear barrier response to tracer bias is a universal property of excursion-set void cosmology rather than an algorithm-specific artifact.
+    \item \textbf{Model-Finder Compatibility \& MCMC Bias Resolution:} Proved that the idealized spherical Vdn excursion-set model is structurally compatible with dynamical Lagrangian reconstruction (\texttt{BitVF}, $\chi^2/\nu \approx 0.90\text{--}1.67$), but fails for Voronoi watershed finders (\texttt{REVOLVER}, $\chi^2/\nu \approx 3.14\text{--}8.12$). Demonstrated that unmerged watershed basins over-partition large voids, creating a systematic residual slope tilt that drives Bayesian MCMC samplers toward unphysical cosmological parameters ($\Omega_m \sim 0.44$).
+    \item \textbf{Bayesian Parameter Inference Pipeline:} Developed complete Python/C++ MCMC sampling framework using \texttt{CosmoBolognaLib} (CBL) and \texttt{emcee}. Calibrated informative Gaussian priors from simulation mocks, successfully recovering primordial amplitude $\sigma_8$ to \textbf{$1.2\%$ precision} ($\bar{\sigma}_8 = 0.8208 \pm 0.009$ for BitVF vs.\ fiducial $0.8110$).
+    \item \textbf{Robustness Audits \& Volume Conservation Prerequisite:} Constructed 64-region spatial Jackknife covariance matrices debiased via the Anderson-Hartlap factor. Demonstrated that Vdn modeling mathematically requires non-overlapping spherical voids (\texttt{TOUCH}), where concentric center overlaps (\texttt{CENTER}) double-count volume and artificially inflate $\chi^2/\nu$ to $\sim 25$.
+\end{itemize}
+
+\vspace{3pt}
+
+\entryheader{Research Projects --- Primordial Black Holes (PBHs) \& Early Universe Cosmology}{2024 -- 2025}{Department of Physics, BITS Pilani}{Hyderabad, India}
+\begin{itemize}
+    \item \textbf{PBH Formation Mechanisms \& Horizon Re-entry:} Investigated the formation of Primordial Black Holes from large-amplitude cosmological density perturbations re-entering the Hubble horizon during radiation domination. Studied the critical collapse overdensity threshold $\delta_c$ and mass fraction $\beta(M)$.
+    \item \textbf{Dark Matter Fraction \& Observational Windows:} Explored current observational limits on $f_{\mathrm{PBH}} = \Omega_{\mathrm{PBH}}/\Omega_{\mathrm{DM}}$ across different mass regimes, including Hawking evaporation bounds (low mass), gravitational microlensing (intermediate mass), and accretion limits from CMB anisotropies.
+    \item \textbf{Linear Perturbation Theory \& Growth Factors:} Analyzed the evolution of scalar cosmological perturbations, Jeans mass scales, and power spectrum calculations using numerical Boltzmann solvers (CAMB).
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════
+%  PUBLICATIONS & MANUSCRIPTS
+% ═════════════════════════════════════════════════════════════
+\section{Publications \& Scientific Manuscripts}
+
+\begin{itemize}
+    \item \textbf{A. Mitra}, S. Sartori, F. Marulli, S. Contarini, T. Ronconi, and L. Moscardini (2026).\\
+    \textit{``Universality of the Linear Void Barrier and Model-Finder Compatibility in Excursion-Set Void Cosmology: Benchmarking Dynamical Reconstruction against Voronoi Watershed on Aletheia Simulations''}.\\
+    \textit{Manuscript in preparation for preprint / journal submission based on Master's thesis discoveries.}
+    \item \textbf{A. Mitra Kommireddy} (2026).\\
+    \textit{``Study of Cosmic Void Size Function using Computational Methods: Validation with Simulated Catalogs, Bayesian Parameter Estimation, and an Audit of Overlap-Based Degeneracy Breaking''}.\\
+    Master's Research Thesis (BITS F422T, 16 units), BITS Pilani. Supervised by Prof.\ F.~Marulli \& Dr.\ S.~Sartori.
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════
+%  TECHNICAL & COMPUTATIONAL SKILLS
+% ═════════════════════════════════════════════════════════════
+\section{Technical \& Computational Skills}
+
+\begin{tabularx}{\textwidth}{@{}p{3.8cm}X@{}}
+    \textbf{Cosmology Software:} & \textbf{CosmoBolognaLib (CBL)} (C++ routines and Python numerical bindings), \textbf{BitVF} (Optimal Transport displacement reconstruction), \textbf{REVOLVER} / \textbf{ZOBOV} (Voronoi watershed), \textbf{CAMB}. \\
+    \textbf{Statistical Inference:} & \textbf{emcee}, \textbf{GetDist}, \textbf{corner}, Markov Chain Monte Carlo (MCMC), spatial Jackknife covariance matrices, Anderson-Hartlap precision unbiasing, informative Gaussian priors, $\chi^2/\nu$ goodness-of-fit. \\
+    \textbf{Programming Languages:} & \textbf{Python} (NumPy, SciPy, Matplotlib, Astropy, Pandas, multiprocessing), \textbf{C/C++} (scientific compilation, shared libraries, OpenMP), \textbf{Shell} (Bash/Zsh). \\
+    \textbf{Data \& HPC Workflows:} & Gigaparsec $N$-body simulations ($1024^3$ particles), halo and void catalog processing, geometric sphere cleaning, FITS, HDF5, Git/GitHub, Linux/macOS Unix environments. \\
+    \textbf{Scientific Typesetting:} & \LaTeX, Bib\TeX, Overleaf, publication-grade vector graphics (Matplotlib).
+\end{tabularx}
+
+% ═════════════════════════════════════════════════════════════
+%  SCHOLARSHIPS & ACADEMIC RECOGNITION
+% ═════════════════════════════════════════════════════════════
+\section{Scholarships \& Academic Recognition}
+
+\begin{itemize}
+    \item \textbf{Merit-cum-Need Scholarship:} Birla Institute of Technology and Science, Pilani. Awarded for \textbf{5 academic semesters} across the dual degree program.
+    \item \textbf{National Admission Selectivity:} Top percentile rank in nationwide BITSAT examination ($<2\%$ acceptance rate among $\sim 200{,}000$ candidates).
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════
+%  ACADEMIC REFERENCES
+% ═════════════════════════════════════════════════════════════
+\section{Academic References}
+
+\begin{tabularx}{\textwidth}{@{}XXX@{}}
+    \textbf{Prof.\ Federico Marulli} & \textbf{Dr.\ Simone Sartori} & \textbf{Prof.\ Sashideep Gutti} \\
+    \textit{Primary Thesis Advisor} & \textit{Thesis Co-Advisor \& BitVF Author} & \textit{BITS Pilani Co-Supervisor} \\
+    Associate Professor of Astrophysics & Researcher / Staff Astrophysicist & Professor of Physics \\
+    DIFA, Università di Bologna \& & INAF -- IASF Milano, Italy & Department of Physics, BITS Pilani \\
+    INAF -- OAS Bologna, Italy & Email: \href{mailto:simone.sartori@inaf.it}{simone.sartori@inaf.it} & Hyderabad Campus, India \\
+    Email: \href{mailto:federico.marulli3@unibo.it}{federico.marulli3@unibo.it} & & Email: \href{mailto:asashideep@hyderabad.bits-pilani.ac.in}{asashideep@hyderabad.bits-pilani.ac.in}
+\end{tabularx}
+
+\end{document}

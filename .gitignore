@@ -131,3 +131,25 @@ Thumbs.db
 *.tmp
 *.log
 
+
+# Private planning & personal files (kept locally, never published)
+void_analysis/professors_outreach_*.csv
+void_analysis/phd_tracker/
+void_analysis/academic_cv/
+void_analysis/CLAUDE.md
+void_analysis/AGY.md
+void_analysis/handoff.md
+void_analysis/MASTER_PROJECT_CONTEXT.md
+void_analysis/presentation_prep_committee.md
+void_analysis/knowledge_vault/04_PhD_Outreach_Dossiers/
+void_analysis/.agents/skills/phd-outreach-engine/
+void_analysis/scripts/harvest_advisor_preprints.py
+comprehensive_info.md
+
+# Compiled binaries & OS/Python junk
+first_cosmo
+run_aletheia_bitvf
+run_aletheia_recon
+*.o
+.DS_Store
+__pycache__/
